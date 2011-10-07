@@ -12,8 +12,7 @@ module HumbleAuth
       end
 
       def require_authentication
-        unless authenticated?
-          process_authentication
+        if !authenticated? && process_authentication
           authentication.save
         end
       end
@@ -24,9 +23,7 @@ module HumbleAuth
 
       def process_authentication
         if authentication.required?
-          authenticate_or_request_with_http_basic do |username, password|
-            authentication.validate(username, password)
-          end
+          authenticate_or_request_with_http_basic { |username, password| authentication.validate(username, password) } == true
         else
           true
         end
