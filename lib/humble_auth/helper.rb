@@ -23,7 +23,7 @@ module HumbleAuth
       end
 
       def process_authentication
-        if authentication_manager.require_authentication?
+        if authentication.required?
           authenticate_or_request_with_http_basic do |username, password|
             authentication.validate(username, password)
           end
