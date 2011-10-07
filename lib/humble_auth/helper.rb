@@ -25,15 +25,15 @@ module HumbleAuth
       def process_authentication
         if authentication_manager.require_authentication?
           authenticate_or_request_with_http_basic do |username, password|
-            authentication_manager.validate(username, password)
+            authentication.validate(username, password)
           end
         else
           true
         end
       end
     
-      def authentication_manager
-        @authentication_manager ||= HumbleAuth::Manager.new(Rails.application.config.auth, cookies)
+      def authentication
+        @authentication ||= HumbleAuth::Auth.new(Rails.application.config.auth, cookies)
       end
   end
 end
