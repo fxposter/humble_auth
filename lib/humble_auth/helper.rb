@@ -1,5 +1,11 @@
 module HumbleAuth
   module Helper
+    def self.included(controller)
+      controller.class_eval do
+        helper_method :authenticated?
+      end
+    end
+    
     protected
       def authenticated?
         authentication.check
