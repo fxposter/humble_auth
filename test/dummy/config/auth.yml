@@ -1,9 +1,0 @@
-development:
-  auth: false
-test:
-  auth: false
-production:
-  auth:
-    login: YourLogin
-    password: YoURPAsSwORd
-    salt: SOMErandomSTRING

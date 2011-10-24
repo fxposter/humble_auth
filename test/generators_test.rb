@@ -2,7 +2,7 @@ require 'test_helper'
 require 'generators/humble_auth/install_generator'
 
 class HumbleAuth::Generators::InstallGeneratorTest < Rails::Generators::TestCase
-  destination File.join(Rails.root)
+  destination File.expand_path('../../tmp/', __FILE__)
   tests HumbleAuth::Generators::InstallGenerator
 
   test "should invoke template engine" do
