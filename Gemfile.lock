@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    humble_auth (0.0.1)
+    humble_auth (0.0.2)
       actionpack (>= 3.0.0, < 3.2.0)
       activesupport (>= 3.0.0, < 3.2.0)
       railties (>= 3.0.0, < 3.2.0)
