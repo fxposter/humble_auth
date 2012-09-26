@@ -1,6 +1,6 @@
 require 'bundler/setup'
-Bundler.require(:default, :development)
-require "action_dispatch"
-require "active_support/core_ext"
+require 'test/unit'
+
+require 'humble_auth'
 require 'action_controller'
-require "test/unit"
+require 'active_support/core_ext'

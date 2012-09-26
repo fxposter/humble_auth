@@ -6,11 +6,11 @@ class HelperTest < ActionController::TestCase
     match ':controller(/:action)'
   end
   Routes.finalize!
-  
+
   class DummyController < ActionController::Base
     include HumbleAuth::Helper
     before_filter :require_authentication
-    
+
     include Routes.url_helpers
 
     def authentication_config
@@ -21,33 +21,33 @@ class HelperTest < ActionController::TestCase
       head :ok
     end
   end
-  
+
   tests DummyController
-  
+
   setup do
     @routes = Routes
   end
-  
+
   test "deny access for users, who don't provide credentials" do
     get :index
     assert_response :unauthorized
     assert !@controller.authenticated?
   end
-  
+
   test "prevent authentication on subsequent requests for users, who don't provide credentials" do
     get :index
     get :index
     assert_response :unauthorized
     assert !@controller.authenticated?
   end
-  
+
   test "allow access for users, who provide credentials" do
     @request.env['HTTP_AUTHORIZATION'] = encode_credentials('YourLogin', 'YoURPAsSwORd')
     get :index
     assert_response :success
     assert @controller.authenticated?
   end
-  
+
   test "allow access for users, who provide credentials on subsequest requests" do
     @request.env['HTTP_AUTHORIZATION'] = encode_credentials('YourLogin', 'YoURPAsSwORd')
     get :index
@@ -56,7 +56,7 @@ class HelperTest < ActionController::TestCase
     assert_response :success
     assert @controller.authenticated?
   end
-  
+
   test "deny access for users after resetting authenticaton" do
     @request.env['HTTP_AUTHORIZATION'] = encode_credentials('YourLogin', 'YoURPAsSwORd')
     get :index
@@ -65,9 +65,9 @@ class HelperTest < ActionController::TestCase
     get :index
     assert_response :unauthorized
   end
-  
+
   private
     def encode_credentials(username, password)
-      "Basic #{ActiveSupport::Base64.encode64("#{username}:#{password}")}"
+      "Basic #{(defined?(::Base64) ? ::Base64 : ::ActiveSupport::Base64).encode64("#{username}:#{password}")}"
     end
 end

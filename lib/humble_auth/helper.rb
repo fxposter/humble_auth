@@ -5,15 +5,15 @@ module HumbleAuth
         helper_method :authenticated?
       end
     end
-    
+
     def authenticated?
       authentication.check
     end
-    
+
     def reset_authentication
       authentication.reset
     end
-    
+
     protected
       def require_authentication
         if !authenticated? && process_authentication
@@ -28,11 +28,11 @@ module HumbleAuth
           true
         end
       end
-    
+
       def authentication
         @authentication ||= HumbleAuth::Auth.new(authentication_config, cookies)
       end
-      
+
       def authentication_config
         Rails.application.config.auth
       end
