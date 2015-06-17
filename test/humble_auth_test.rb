@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DisabledAuthTest < ActiveSupport::TestCase
   setup do
-    @store = ActionDispatch::Cookies::CookieJar.new
+    @store = ActionDispatch::Cookies::CookieJar.new(nil)
     @config = HumbleAuth::Auth.make_config(false)
     @auth ||= HumbleAuth::Auth.new(@config, @store)
   end
@@ -30,7 +30,7 @@ end
 
 class EnabledAuthTest < ActiveSupport::TestCase
   setup do
-    @store = ActionDispatch::Cookies::CookieJar.new
+    @store = ActionDispatch::Cookies::CookieJar.new(nil)
     @config = HumbleAuth::Auth.make_config(:login => 'YourLogin', :password => 'YoURPAsSwORd', :salt => 'SOMErandomSTRING')
     @auth ||= HumbleAuth::Auth.new(@config, @store)
   end

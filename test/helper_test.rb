@@ -3,7 +3,7 @@ require 'test_helper'
 class HelperTest < ActionController::TestCase
   Routes = ActionDispatch::Routing::RouteSet.new
   Routes.draw do
-    match ':controller(/:action)'
+    get ':controller(/:action)'
   end
   Routes.finalize!
 
